@@ -13,6 +13,11 @@
 </body>
 ```
 2. 调用方法
+(1)在想要放置分页插件的页面加入如下的div，page属性填写从后台接口中获取的当前页数，totalPage填写总页数
+```html
+<div class="x-pager" page="${postsPage.pageNo}" totalPage="${postsPage.pages}"></div>
+```
+(2)js中调用
 ```javascript
 //必填参数size（每页显示几条数据）
 //可选参数url（需要访问的controler的url）
@@ -23,5 +28,3 @@ $(function() {
 			});
 		})
 ```
-
-3. 出现问题了请联系徐文超。QQ：842390367
