@@ -9,7 +9,7 @@ $.fn.pager = function(options) {
 		.replace(/\?/, ''),
 		formForXpage = $('#for-xpager'),
 		url = options.url == undefined ? formForXpage.prop('action') : options.url,
-		sArray = searchKey.split('&'),
+		sArray = window.location.search.split('&'),
 		length = sArray.length,
 		newArray = [];
 	//参数缺失提示
@@ -42,17 +42,21 @@ $.fn.pager = function(options) {
 		lastBtn = $('.x-last');
 
 	//多种情况详细按钮组的渲染控制
-	console.log(page + "/" + totalPage);
 	if (totalPage <= 7) {
+		var oneArray = [];
 		for (var i = 1; i <= totalPage; i++) {
-			$('<a class="little-page" href="' + url + '?size=' + options.size + '&page=' + i + str + '">' + i + '</a>').insertBefore(nextBtn);
+			oneArray.push('<a class="little-page" href="' + url + '?size=' + options.size + '&page=' + i + str + '">' + i + '</a>');
 		}
-	} else if (page < 4) {
+		$(oneArray.join('')).insertBefore(nextBtn);
+	} else if (page <= 4) {
+		var twoArray = [];
 		for (var i = 1; i <= 6; i++) {
-			$('<a class="little-page" href="' + url + '?size=' + options.size + '&page=' + i + str + '">' + i + '</a>').insertBefore(nextBtn);
+			twoArray.push('<a class="little-page" href="' + url + '?size=' + options.size + '&page=' + i + str + '">' + i + '</a>');
 		}
-		$('<a class="little-page" href="' + url + '?size=' + options.size + '&page=' + totalPage + str + '">...' + totalPage + '</a>').insertBefore(nextBtn);
-	} else if (page >= 4 && (totalPage - page) >= 3) {
+		twoArray.push('<a class="little-page" href="' + url + '?size=' + options.size + '&page=' + totalPage + str + '">...' + totalPage + '</a>');
+		$(twoArray.join('')).insertBefore(nextBtn);
+	} else if (page > 4 && (totalPage - page) >= 3) {
+		console.log('yes');
 		$('<a class="little-page" href="' + url + '?size=' + options.size + '&page=1' + str + '">' + 1 + '...</a>').insertBefore(nextBtn);
 		$('<a class="little-page" href="' + url + '?size=' + options.size + '&page=' + (page - 2) + str + '">' + (page - 2) + '</a>').insertBefore(nextBtn);
 		$('<a class="little-page" href="' + url + '?size=' + options.size + '&page=' + (page - 1) + str + '">' + (page - 1) + '</a>').insertBefore(nextBtn);
@@ -66,7 +70,6 @@ $.fn.pager = function(options) {
 			$('<a class="little-page" href="' + url + '?size=' + options.size + '&page=' + i + str + '">' + i + '</a>').insertBefore(nextBtn);
 		}
 	}
-
 	if (currentPageBtn.text() == 1) {
 		previousBtn.addClass('x-disable');
 		firstBtn.addClass('x-disable');

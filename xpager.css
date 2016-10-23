@@ -1,4 +1,4 @@
-.x-pager {
+﻿.x-pager {
 	width: 960px;
 	margin: 0 auto 10px;
 	text-align: center;
@@ -43,7 +43,13 @@ a.x-disable, a.x-disable:hover {
 	color: #fff;
 	background-color: #C9C8C8;
 }
-
+a.little-page{
+	border-radius:0;
+	border:1px solid #5591eb;
+}
+a.little-page+a.little-page{
+	border-left: none;
+}
 a.current {
 	color: #fff;
 	background-color: #0881cf;
