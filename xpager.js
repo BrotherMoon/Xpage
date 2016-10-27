@@ -5,11 +5,10 @@
 $.fn.pager = function(options) {
 	var page = parseInt(this.attr('page')),
 		totalPage = this.attr('totalPage'),
-		searchKey = window.location.search
-		.replace(/\?/, ''),
+		searchKey = window.location.search.replace(/\?/, ''),
 		formForXpage = $('#for-xpager'),
 		url = options.url == undefined ? formForXpage.prop('action') : options.url,
-		sArray = window.location.search.split('&'),
+		sArray = searchKey.split('&'),
 		length = sArray.length,
 		newArray = [];
 	//参数缺失提示
@@ -77,12 +76,18 @@ $.fn.pager = function(options) {
 		previousBtn.click(function() {
 			return false;
 		});
+		firstBtn.click(function() {
+			return false;
+		});
 	}
 	if (currentPageBtn.text() == totalPageBtn.text()) {
 		nextBtn.addClass('x-disable');
 		lastBtn.addClass('x-disable');
 		// 如果当前在最后一页，取消下一页按钮默认行为
 		nextBtn.click(function() {
+			return false;
+		});
+		lastBtn.click(function() {
 			return false;
 		});
 	}
